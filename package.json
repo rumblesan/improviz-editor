@@ -10,7 +10,7 @@
     "url": "https://github.com/rumblesan/improviz-editor"
   },
   "build": {
-    "appId": "com.example.electron-boilerplate",
+    "appId": "com.rumblesan.improviz-editor",
     "files": [
       "app/**/*",
       "node_modules/**/*",
