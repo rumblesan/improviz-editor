@@ -6,6 +6,7 @@ const defaultConfig = {
     host: "localhost",
     port: "3000",
   },
+  transparent: false,
   keyMap: "default",
   lineNumbers: false,
   theme: "improviz",

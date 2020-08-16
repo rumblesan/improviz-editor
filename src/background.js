@@ -3,6 +3,7 @@ import url from "url";
 import { app, ipcMain, Menu } from "electron";
 import { devMenuTemplate } from "./menu/dev_menu_template";
 import { editMenuTemplate } from "./menu/edit_menu_template";
+import { settingsMenuTemplate } from "./menu/settings_menu_template";
 import createWindow from "./helpers/window";
 
 import { loadConfig } from "./config";
@@ -10,7 +11,7 @@ import { loadConfig } from "./config";
 import env from "env";
 
 const setApplicationMenu = () => {
-  const menus = [editMenuTemplate];
+  const menus = [editMenuTemplate, settingsMenuTemplate];
   if (env.name !== "production") {
     menus.push(devMenuTemplate);
   }
@@ -37,10 +38,12 @@ ipcMain.on("save-config", (event, arg) => {
 app.on("ready", () => {
   setApplicationMenu();
 
+  const cfg = loadConfig();
+
   const mainWindow = createWindow("main", {
     width: 1000,
     height: 600,
-    transparent: true,
+    transparent: cfg.transparent,
     webPreferences: {
       nodeIntegration: true,
     },
