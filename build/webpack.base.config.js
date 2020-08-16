@@ -9,36 +9,43 @@ const translateEnvToMode = (env) => {
   return "development";
 };
 
-module.exports = env => {
+module.exports = (env) => {
   return {
     target: "electron-renderer",
     mode: translateEnvToMode(env),
     node: {
       __dirname: false,
-      __filename: false
+      __filename: false,
     },
     externals: [nodeExternals()],
     resolve: {
+      extensions: [".js", ".html"],
       alias: {
-        env: path.resolve(__dirname, `../config/env_${env}.json`)
-      }
+        env: path.resolve(__dirname, `../config/env_${env}.json`),
+      },
     },
     devtool: "source-map",
     module: {
       rules: [
         {
+          test: /\.html$/,
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+          },
+        },
+        {
           test: /\.js$/,
-          exclude: /node_modules/,
-          use: ["babel-loader"]
+          use: ["babel-loader"],
         },
         {
           test: /\.(sa|sc|c)ss$/i,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
-        }
-      ]
+          use: ["style-loader", "css-loader", "sass-loader"],
+        },
+      ],
     },
     plugins: [
-      new FriendlyErrorsWebpackPlugin({ clearConsole: env === "development" })
-    ]
+      new FriendlyErrorsWebpackPlugin({ clearConsole: env === "development" }),
+    ],
   };
 };

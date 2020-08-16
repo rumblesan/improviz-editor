@@ -1,3 +1,5 @@
+import "./app.html";
+
 import "./stylesheets/main.scss";
 import "./stylesheets/codemirror.css";
 import "./stylesheets/codemirror-lint.css";
