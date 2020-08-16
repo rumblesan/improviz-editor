@@ -12,6 +12,10 @@ $cursor-color: #bfb;
  * */
 .cm-s-improviz {
 
+  &.CodeMirror {
+    background-color: #ffffff;
+  }
+
   &.CodeMirror .CodeMirror-line > span {
     background-color: rgba(solarized.$base03, 0.8);
   }

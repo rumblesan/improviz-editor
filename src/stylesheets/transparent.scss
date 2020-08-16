@@ -4,8 +4,12 @@
 
 body.transparent {
   background-color: rgba(0, 0, 0, 0);
-}
 
-.transparent .cm-s-improviz.CodeMirror {
-  background: transparent;
+  .cm-s-improviz.CodeMirror {
+    background: transparent;
+  }
+
+  header {
+    display: none;
+  }
 }

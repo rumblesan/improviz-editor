@@ -82,11 +82,3 @@ button:hover {
 .CodeMirror {
   font-size: 1.125rem;
 }
-
-/** Performance mode
- *  Hide the header so we get more canvas.
- */
-
-.performance-mode header {
-  visibility: hidden;
-}
