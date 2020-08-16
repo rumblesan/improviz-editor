@@ -1,30 +1,21 @@
 import "./app.html";
 
 import "./stylesheets/main.scss";
-import "./stylesheets/codemirror.css";
-import "./stylesheets/codemirror-lint.css";
 
-// Small helpers you might want to keep
 import "./helpers/external_links.js";
 
-const defaultConfig = {
-  improviz: {
-    host: "localhost",
-    port: "3000",
-  },
-  keyMap: "default",
-  lineNumbers: false,
-  theme: "improviz",
-  performanceMode: false,
-  program: "t = time/100\nrotate(t)\nfill(1, 0, 0.8, 0.5)\ncube(1)",
-};
-
+import "codemirror/lib/codemirror.css";
+import "codemirror/addon/lint/lint.css";
 import CodeMirror from "codemirror";
 import "codemirror/keymap/vim";
-import "codemirror/addon/lint/lint.js";
+import "codemirror/addon/lint/lint";
 
-import { Improviz } from "./improviz.js";
+import { Improviz } from "./improviz";
+
+import { ipcRenderer } from "electron";
+
+var cfg = ipcRenderer.sendSync("load-config", "");
 
 const editorContainerEl = document.querySelector("body");
 
-new Improviz(editorContainerEl, defaultConfig, CodeMirror);
+new Improviz(editorContainerEl, cfg, CodeMirror);

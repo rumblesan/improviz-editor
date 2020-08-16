@@ -17,9 +17,8 @@ module.exports = (env) => {
       __dirname: false,
       __filename: false,
     },
-    externals: [nodeExternals()],
     resolve: {
-      extensions: [".js", ".html"],
+      extensions: [".js", ".html", ".css"],
       alias: {
         env: path.resolve(__dirname, `../config/env_${env}.json`),
       },
