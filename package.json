@@ -5,6 +5,10 @@
   "author": "Guy John <guy@rumblesan.com>",
   "homepage": "http://improviz.rumblesan.com",
   "main": "app/background.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rumblesan/improviz-editor"
+  },
   "build": {
     "appId": "com.example.electron-boilerplate",
     "files": [
@@ -54,5 +58,6 @@
     "webpack-cli": "3.3.12",
     "webpack-merge": "5.1.1",
     "webpack-node-externals": "2.5.1"
-  }
+  },
+  "license": "BSD-3-Clause"
 }
