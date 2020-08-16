@@ -1,22 +1,60 @@
-import "./app.html";
-
-import "./stylesheets/main.scss";
-
-import "./helpers/external_links.js";
-
+import { ipcRenderer } from "electron";
 import "codemirror/lib/codemirror.css";
 import "codemirror/addon/lint/lint.css";
 import CodeMirror from "codemirror";
 import "codemirror/keymap/vim";
 import "codemirror/addon/lint/lint";
 
+import "./app.html";
+
+import "./stylesheets/main.scss";
+
+import "./helpers/external_links.js";
+
+import * as templates from "./templates";
+import { clickHandler } from "./dom";
+
 import { Improviz } from "./improviz";
+import { EventBus } from "./event-bus";
+import { Popups } from "./ui/popups";
+import { UI } from "./ui";
 
-import { ipcRenderer } from "electron";
+function start() {
+  const cfg = ipcRenderer.sendSync("load-config", "");
 
-var cfg = ipcRenderer.sendSync("load-config", "");
+  const eventBus = new EventBus();
+  const ui = new UI(eventBus);
+  const popups = new Popups(document.querySelector("body"));
 
-const editorContainerEl = document.querySelector("body");
-document.querySelector("body").classList.add("transparent");
+  eventBus.on("display-popup", popups.trigger.bind(popups));
+  popups.register("error-popup", false, (message, error) => {
+    return templates.errorPopup({
+      message,
+      error,
+    });
+  });
 
-new Improviz(editorContainerEl, cfg, CodeMirror);
+  const editorContainerEl = document.querySelector("body");
+  document.querySelector("body").classList.add("transparent");
+
+  new Improviz(editorContainerEl, cfg, eventBus, CodeMirror);
+
+  popups.register("settings", true, () => {
+    return templates.settingsPopup({});
+  });
+
+  popups.register("help", true, () => {
+    return templates.helpPopup();
+  });
+
+  clickHandler("#evaluate", () => eventBus.emit("evaluate"));
+  clickHandler("#display-help", () => eventBus.emit("display-popup", "help"));
+  clickHandler("#display-settings", () =>
+    eventBus.emit("display-popup", "settings")
+  );
+
+  if (cfg.performanceMode) {
+    ui.performanceMode();
+  }
+}
+start();

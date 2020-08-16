@@ -33,6 +33,7 @@ module.exports = (env) => {
             name: "[name].[ext]",
           },
         },
+        { test: /\.handlebars$/, loader: "handlebars-loader" },
         {
           test: /\.js$/,
           use: ["babel-loader"],

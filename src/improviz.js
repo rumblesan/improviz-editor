@@ -1,6 +1,10 @@
 export class Improviz {
-  constructor(editorContainerElement, config, CodeMirror) {
+  constructor(editorContainerElement, config, eventBus, CodeMirror) {
     this.config = config;
+    this.eventBus = eventBus;
+
+    this.eventBus.on("evaluate", () => this.evaluate());
+
     this.editor = CodeMirror(
       (el) => {
         editorContainerElement.appendChild(el);
