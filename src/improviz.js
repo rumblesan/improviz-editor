@@ -1,8 +1,7 @@
-
 export class Improviz {
   constructor(editorContainerElement, config, CodeMirror) {
     this.editor = CodeMirror(
-      el => {
+      (el) => {
         editorContainerElement.appendChild(el);
       },
       {
@@ -10,16 +9,16 @@ export class Improviz {
         lineNumbers: config.lineNumbers,
         theme: config.theme,
         value: config.program,
-        mode: 'improviz',
+        mode: "improviz",
         autofocus: true,
-        gutters: ['CodeMirror-lint-markers'],
+        gutters: ["CodeMirror-lint-markers"],
         lint: {
-          getAnnotations: program => {
+          getAnnotations: (program) => {
             return [];
           },
         },
         extraKeys: {
-          'Ctrl-Enter': () => this.evaluate(),
+          "Ctrl-Enter": () => this.evaluate(),
         },
       }
     );
