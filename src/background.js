@@ -36,7 +36,9 @@ app.on("ready", () => {
   const mainWindow = createWindow("main", {
     width: 1000,
     height: 600,
+    transparent: true,
     webPreferences: {
+      worldSafeExecuteJavaScript: true,
       nodeIntegration: true
     }
   });
@@ -49,9 +51,9 @@ app.on("ready", () => {
     })
   );
 
-  //if (env.name === "development") {
-    //mainWindow.openDevTools();
-  //}
+  if (env.name === "development") {
+    mainWindow.openDevTools();
+  }
 });
 
 app.on("window-all-closed", () => {
