@@ -1,5 +1,6 @@
 export class Improviz {
   constructor(editorContainerElement, config, CodeMirror) {
+    this.config = config;
     this.editor = CodeMirror(
       (el) => {
         editorContainerElement.appendChild(el);
@@ -29,6 +30,12 @@ export class Improviz {
   }
 
   evaluate() {
-    console.log(this.getProgram());
+    const impConf = this.config.improviz;
+    fetch(`http://${impConf.host}:${impConf.port}/read`, {
+      method: "POST",
+      body: this.getProgram(),
+    })
+      .then((response) => response.json())
+      .then((out) => console.log(out));
   }
 }

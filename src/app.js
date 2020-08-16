@@ -6,9 +6,11 @@ import "./stylesheets/codemirror-lint.css";
 import "./helpers/context_menu.js";
 import "./helpers/external_links.js";
 
-import env from "env";
-
 const defaultConfig = {
+  improviz: {
+    host: "localhost",
+    port: "3000",
+  },
   keyMap: "default",
   lineNumbers: false,
   theme: "improviz",
@@ -24,4 +26,4 @@ import { Improviz } from "./improviz.js";
 
 const editorContainerEl = document.querySelector("body");
 
-const improviz = new Improviz(editorContainerEl, defaultConfig, CodeMirror);
+new Improviz(editorContainerEl, defaultConfig, CodeMirror);
