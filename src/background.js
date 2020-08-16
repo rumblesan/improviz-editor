@@ -57,7 +57,8 @@ app.on("ready", () => {
     })
   );
 
-  if (env.name === "development") {
+  // Loading dev tools messes up the transparency for some reason
+  if (env.name === "development" && !cfg.transparent) {
     mainWindow.openDevTools();
   }
 });

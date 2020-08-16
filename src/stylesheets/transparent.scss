@@ -1,0 +1,11 @@
+/**
+ * Styling specifically for when transparency is enabled
+ */
+
+body.transparent {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.transparent .cm-s-improviz.CodeMirror {
+  background: transparent;
+}

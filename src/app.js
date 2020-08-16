@@ -17,5 +17,6 @@ import { ipcRenderer } from "electron";
 var cfg = ipcRenderer.sendSync("load-config", "");
 
 const editorContainerEl = document.querySelector("body");
+document.querySelector("body").classList.add("transparent");
 
 new Improviz(editorContainerEl, cfg, CodeMirror);
