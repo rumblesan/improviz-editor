@@ -8,11 +8,10 @@ export class Popups {
     this.displayedPopupEl = null;
   }
 
-  register(name, displayHash, markupGenerator) {
+  register(name, markupGenerator) {
     this.popups[name] = {
       name,
       markupGenerator: markupGenerator,
-      displayHash,
     };
   }
 

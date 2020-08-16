@@ -27,7 +27,7 @@ function start() {
   const popups = new Popups(document.querySelector("body"));
 
   eventBus.on("display-popup", popups.trigger.bind(popups));
-  popups.register("error-popup", false, (message, error) => {
+  popups.register("error-popup", (message, error) => {
     return templates.errorPopup({
       message,
       error,
@@ -39,11 +39,11 @@ function start() {
 
   new Improviz(editorContainerEl, cfg, eventBus, CodeMirror);
 
-  popups.register("settings", true, () => {
+  popups.register("settings", () => {
     return templates.settingsPopup({});
   });
 
-  popups.register("help", true, () => {
+  popups.register("help", () => {
     return templates.helpPopup();
   });
 
