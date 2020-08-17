@@ -22,12 +22,13 @@
     "publish": null
   },
   "scripts": {
-    "postinstall": "electron-builder install-app-deps",
     "preunit": "webpack --config=build/webpack.unit.config.js --env=test --display=none",
     "unit": "electron-mocha temp/specs.js --renderer --require source-map-support/register",
     "test": "npm run unit",
     "start": "node build/start.js",
-    "release": "npm test && webpack --config=build/webpack.app.config.js --env=production && electron-builder"
+    "build": "webpack --config=build/webpack.app.config.js --env=production",
+    "build:osx": "electron-packager . ImprovizEditor --platform=darwin --arch=x64 --out ./dist/ --overwrite --icon=resources/icon.icns",
+    "build:nix": "electron-packager . ImprovizEditor --platform=linux  --arch=x64 --out ./dist/ --overwrite --icon=resources/icon.ico"
   },
   "dependencies": {
     "codemirror": "5.56.0",
@@ -40,8 +41,8 @@
     "babel-loader": "8.1.0",
     "css-loader": "4.2.1",
     "electron": "9.2.0",
-    "electron-builder": "22.8.0",
     "electron-mocha": "9.1.0",
+    "electron-packager": "^15.0.0",
     "eslint": "7.7.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-prettier": "3.1.4",
