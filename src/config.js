@@ -6,12 +6,10 @@ const defaultConfig = {
     host: "localhost",
     port: "3000",
   },
-  transparent: false,
   keyMap: "default",
-  lineNumbers: false,
-  theme: "improviz",
+  transparent: false,
+  lineNumbers: true,
   performanceMode: false,
-  program: "t = time/100\nrotate(t)\nfill(1, 0, 0.8, 0.5)\ncube(1)",
 };
 
 const configStoreFile = `improviz-config.json`;

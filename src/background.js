@@ -6,7 +6,7 @@ import { editMenuTemplate } from "./menu/edit_menu_template";
 import { settingsMenuTemplate } from "./menu/settings_menu_template";
 import createWindow from "./helpers/window";
 
-import { loadConfig } from "./config";
+import { loadConfig, saveConfig } from "./config";
 
 import env from "env";
 
@@ -31,8 +31,10 @@ ipcMain.on("load-config", (event, arg) => {
   event.returnValue = loadConfig();
 });
 
-ipcMain.on("save-config", (event, arg) => {
-  console.log(arg);
+ipcMain.on("save-config", (event, cfg) => {
+  console.log("saving config", cfg);
+  saveConfig(cfg);
+  event.returnValue = "";
 });
 
 app.on("ready", () => {

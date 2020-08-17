@@ -39,9 +39,32 @@ function start() {
 
   new Improviz(editorContainerEl, cfg, eventBus, CodeMirror);
 
-  popups.register("settings", () => {
-    return templates.settingsPopup({});
-  });
+  popups.register(
+    "settings",
+    () => {
+      const cfg = ipcRenderer.sendSync("load-config", "");
+      return templates.settingsPopup(cfg);
+    },
+    (el) => {
+      const cfg = ipcRenderer.sendSync("load-config", "");
+      const host = el.querySelector("#server-host").value;
+      const port = el.querySelector("#server-port").value;
+      cfg.improviz.host = host;
+      cfg.improviz.port = port;
+      const keyMap = el.querySelector("#keyMap").value;
+      cfg.keyMap = keyMap;
+      const transparent =
+        el.querySelector("#toggle-transparency").value === "on";
+      cfg.transparent = transparent;
+      const performanceMode =
+        el.querySelector("#toggle-performance").value === "on";
+      cfg.performanceMode = performanceMode;
+      const lineNumbers =
+        el.querySelector("#toggle-linenumbers").value === "on";
+      cfg.lineNumbers = lineNumbers;
+      ipcRenderer.sendSync("save-config", cfg);
+    }
+  );
 
   popups.register("help", () => {
     return templates.helpPopup();

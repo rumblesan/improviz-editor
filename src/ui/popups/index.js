@@ -8,10 +8,11 @@ export class Popups {
     this.displayedPopupEl = null;
   }
 
-  register(name, markupGenerator) {
+  register(name, markupGenerator, onCloseHandler) {
     this.popups[name] = {
       name,
-      markupGenerator: markupGenerator,
+      markupGenerator,
+      onCloseHandler,
     };
   }
 
@@ -44,6 +45,9 @@ export class Popups {
     if (closeButton) {
       closeButton.addEventListener("click", (e) => {
         e.preventDefault();
+        if (this.popups[name].onCloseHandler) {
+          this.popups[name].onCloseHandler(popup);
+        }
         this.hide();
         return false;
       });

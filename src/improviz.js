@@ -12,8 +12,7 @@ export class Improviz {
       {
         keyMap: config.keyMap,
         lineNumbers: config.lineNumbers,
-        theme: config.theme,
-        value: config.program,
+        theme: "improviz",
         mode: "improviz",
         autofocus: true,
         gutters: ["CodeMirror-lint-markers"],

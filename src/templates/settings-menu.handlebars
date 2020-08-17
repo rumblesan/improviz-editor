@@ -6,44 +6,36 @@
 <div class='content'>
 
   <section>
-    <p>
-      Currently, the settings can't actually be changed, because that logic needs building. But it's next on the list, so for the moment, just imagine how useful it will be when you can change them!
-    </p>
+    <h4>Improviz Server</h4>
+    <p>To send programs to the Improviz server, the editor needs to know where it is</p>
+    <input type="text" id="server-host" name="server-host" value="{{improviz.host}}">
+    <input type="text" id="server-port" name="server-port" value="{{improviz.port}}">
   </section>
 
   <section>
     <h4>Key Map</h4>
-    <p>The editor keymapping can be changed with the <em>keymap</em> query argument. Currently the supported bindings are the CodeMirror defaults and Vim bindings</p>
-    <ul>
-      <li><a href="#">Default Keymap</a></li>
-      <li><a href="#">Vim Keymap</a></li>
-    </ul>
+    <p>Currently the supported bindings are the CodeMirror defaults and Vim bindings</p>
+    <select id="keyMap" name="keyMap">
+      <option value="default" {{{setSelected "default" keyMap}}}>Default</option>
+      <option value="vim" {{{setSelected "vim" keyMap}}}>Vim</option>
+    </select>
   </section>
 
   <section>
     <h4>Transparent Background</h4>
     <p>This will make the entire background of the editor transparent, so it's possible to sit the editor ontop of the visuals</p>
-    <ul>
-      <li><a href="#">Enable Transparency</a></li>
-      <li><a href="#">Disable Transparency</a></li>
-    </ul>
+    <input type="checkbox" id="toggle-transparency" name="transparency" {{#if transparent }}checked{{/if}}><label for="toggle-transparency">Transparency</label>
   </section>
 
   <section>
     <h4>Performance Mode</h4>
-    <p>Enabling performance mode will hide the header bar so that there can be more canvas visible</p>
-    <ul>
-      <li><a href="#">Enable Performance Mode</a></li>
-      <li><a href="#">Disable Performance Mode</a></li>
-    </ul>
+    <p>Enabling performance mode will hide the header bar</p>
+    <input type="checkbox" id="toggle-performance" name="performance" {{#if performanceMode }}checked{{/if}}><label for="toggle-performance">Performance Mode</label>
   </section>
 
   <section>
-    <h4>Line Numbers</h4>
-    <p>Line numbers can be added to the editor with the <em>linenumbers</em> query argument.</p>
-    <ul>
-      <li><a href="#">Enable Line Numbers</a></li>
-      <li><a href="#">Disable Line Numbers</a></li>
-    </ul>
+    <h4>Line Numbers {{{lineNumbers}}}</h4>
+    <p>Line Numbers can be toggled on or off</p>
+    <input type="checkbox" id="toggle-linenumbers" name="linenumbers" {{#if lineNumbers }}checked{{/if}}><label for="toggle-linenumbers">Toggle Line Numbers</label>
   </section>
 </div>

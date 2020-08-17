@@ -5,10 +5,17 @@ export const settingsMenuTemplate = {
   submenu: [
     {
       label: "Transparency",
-      accelerator: "CmdOrCtrl+R",
       click: () => {
         const cfg = loadConfig();
         cfg.transparent = !cfg.transparent;
+        saveConfig(cfg);
+      },
+    },
+    {
+      label: "Performance Mode",
+      click: () => {
+        const cfg = loadConfig();
+        cfg.performanceMode = !cfg.performanceMode;
         saveConfig(cfg);
       },
     },
